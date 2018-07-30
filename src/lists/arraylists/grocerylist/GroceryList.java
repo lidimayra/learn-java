@@ -1,4 +1,4 @@
-package lists.arraylists;
+package lists.arraylists.grocerylist;
 
 import java.io.PrintStream;
 import java.util.ArrayList;

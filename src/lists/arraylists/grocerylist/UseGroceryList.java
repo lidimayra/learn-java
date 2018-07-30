@@ -1,4 +1,6 @@
-package lists.arraylists;
+package lists.arraylists.grocerylist;
+
+import lists.arraylists.grocerylist.GroceryList;
 
 public class UseGroceryList {
     public static void main(String[] args) {
