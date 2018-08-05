@@ -17,6 +17,19 @@ public class MobilePhone {
         myContacts.add(contact);
     }
 
+    public boolean removeContact(String name) {
+        Contact existingContact = findContact(name);
+
+        if(existingContact == null) {
+            System.out.printf("Contact %s has not been found.\n", name);
+            return false;
+        } else {
+            myContacts.remove(existingContact);
+            System.out.printf("Contact %s has been deleted.\n", name);
+            return true;
+        }
+    }
+
     public void listContacts() {
         System.out.printf("You have %d contacts in your list.\n", myContacts.size());
 

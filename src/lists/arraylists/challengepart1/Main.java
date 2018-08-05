@@ -46,6 +46,9 @@ public class Main {
                 case 5:
                     searchContact();
                     break;
+                case 6:
+                    removeContact();
+                    break;
             }
         }
     }
@@ -57,7 +60,8 @@ public class Main {
                         "2. Print list of contacts\n" +
                         "3. Add new contact\n" +
                         "4. Update contact\n" +
-                        "5. Search contact"
+                        "5. Search contact\n" +
+                        "6. Remove contact\n"
         );
     }
 
@@ -116,6 +120,20 @@ public class Main {
         } else {
             System.out.printf("%s: %s\n", contact.getName(), contact.getPhoneNumber());
         }
+
+        System.out.println("-----");
+    }
+
+    public static void removeContact() {
+        System.out.println("Enter the name of the contact to be removed:");
+        String name = scanner.next();
+
+        if (myMobilePhone.removeContact(name)) {
+            System.out.println("Success!");
+        } else {
+            System.out.println("Error!");
+        }
+
         System.out.println("-----");
     }
 
