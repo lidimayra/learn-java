@@ -91,7 +91,17 @@ public class Main {
     }
 
     public static void searchContact() {
+        System.out.println("Enter the name of the contact to be searched:");
+        String name = scanner.next();
 
+        Contact contact = myMobilePhone.findContact(name);
+
+        if (contact == null) {
+            System.out.println("Contact not found");
+        } else {
+            System.out.printf("%s: %s\n", contact.getName(), contact.getPhoneNumber());
+        }
+        System.out.println("-----");
     }
 
     public static Contact promptContactData() {
