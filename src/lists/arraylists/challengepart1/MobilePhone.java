@@ -47,7 +47,10 @@ public class MobilePhone {
     public boolean updateContact(String name, Contact newContact) {
        Contact oldContact = findContact(name);
 
-       if (contactExists(name)) {
+       if (contactExists(newContact.getName())) {
+           System.out.printf("Contact %s is already registered.\n", newContact.getName());
+           return false;
+       } else if (contactExists(name)) {
            int index = myContacts.indexOf(oldContact);
            myContacts.set(index, newContact);
            System.out.printf("Contact %s has been updated\n", newContact.getName());
