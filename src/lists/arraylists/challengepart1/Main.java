@@ -21,24 +21,13 @@ public class Main {
     static boolean quit = false;
 
     public static void main(String[] args) {
-        printInstructions();
-
         chooseOption();
     }
 
-    public static void printInstructions() {
-        System.out.println(
-                "Choose an option:\n" +
-                "1. Quit\n" +
-                "2. Print list of contacts\n" +
-                "3. Add new contact\n" +
-                "4. Remove contact\n" +
-                "5. Search contact"
-        );
-    }
 
     public static void chooseOption() {
         while(!quit) {
+            printInstructions();
             int option = scanner.nextInt();
 
             switch (option) {
@@ -61,6 +50,17 @@ public class Main {
         }
     }
 
+    public static void printInstructions() {
+        System.out.println(
+                "Choose an option:\n" +
+                        "1. Quit\n" +
+                        "2. Print list of contacts\n" +
+                        "3. Add new contact\n" +
+                        "4. Update contact\n" +
+                        "5. Search contact"
+        );
+    }
+
     public static void quit() {
         System.out.println("Quitting...");
         quit = true;
@@ -68,9 +68,33 @@ public class Main {
 
     public static void printContacts() {
         myMobilePhone.listContacts();
+        System.out.println("-----");
     }
 
     public static void addContact() {
+        Contact contact = promptContactData();
+        myMobilePhone.addContact(contact);
+    }
+
+    public static void updateContact() {
+        System.out.println("Enter name of the contact that will be replaced:");
+        String oldContactName = scanner.next();
+
+        Contact oldContact = myMobilePhone.findContact(oldContactName);
+
+        if (oldContact == null) {
+            System.out.println("Contact not found");
+        } else {
+            Contact newContact = promptContactData();
+            myMobilePhone.updateContact(oldContact, newContact);
+        }
+    }
+
+    public static void searchContact() {
+
+    }
+
+    public static Contact promptContactData() {
         System.out.println("Enter contact name:");
         String name = scanner.next();
 
@@ -78,15 +102,6 @@ public class Main {
         String phoneNumber = scanner.next();
 
         Contact contact = Contact.createContact(name, phoneNumber);
-        myMobilePhone.addContact(contact);
-    }
-
-    public static void updateContact() {
-
-    }
-
-    public static void searchContact() {
-
+        return contact;
     }
 }
-
