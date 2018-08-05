@@ -73,7 +73,19 @@ public class Main {
 
     public static void addContact() {
         Contact contact = promptContactData();
-        myMobilePhone.addContact(contact);
+
+        String name = contact.getName();
+
+        Contact existentContact = myMobilePhone.findContact(name);
+
+        if (existentContact == null) {
+            myMobilePhone.addContact(contact);
+            System.out.printf("%s has been added to contacts list.\n", name);
+        } else {
+            System.out.printf("Contact %s is already registered.\n", name);
+        }
+
+        System.out.println("-----");
     }
 
     public static void updateContact() {
@@ -87,7 +99,10 @@ public class Main {
         } else {
             Contact newContact = promptContactData();
             myMobilePhone.updateContact(oldContact, newContact);
+            System.out.printf("Contact %s has been updated\n", newContact.getName());
         }
+
+        System.out.println("-----");
     }
 
     public static void searchContact() {
