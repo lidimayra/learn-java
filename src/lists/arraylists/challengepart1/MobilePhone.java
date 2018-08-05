@@ -72,7 +72,7 @@ public class MobilePhone {
         return null;
     }
 
-    private boolean contactExists(String name) {
+    public boolean contactExists(String name) {
         Contact contact = findContact(name);
 
         return contact != null;

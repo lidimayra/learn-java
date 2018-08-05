@@ -105,12 +105,11 @@ public class Main {
         System.out.println("Enter the name of the contact to be searched:");
         String name = scanner.next();
 
-        Contact contact = myMobilePhone.findContact(name);
-
-        if (contact == null) {
-            System.out.println("Contact not found");
-        } else {
+        if (myMobilePhone.contactExists(name)) {
+            Contact contact = myMobilePhone.findContact(name);
             System.out.printf("%s: %s\n", contact.getName(), contact.getPhoneNumber());
+        } else {
+            System.out.println("Contact not found");
         }
 
         System.out.println("-----");
