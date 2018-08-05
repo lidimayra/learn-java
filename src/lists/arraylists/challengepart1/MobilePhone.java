@@ -1,7 +1,5 @@
 package lists.arraylists.challengepart1;
 
-import org.jetbrains.annotations.Contract;
-
 import java.util.ArrayList;
 
 public class MobilePhone {
@@ -13,20 +11,28 @@ public class MobilePhone {
         this.myContacts = new ArrayList<Contact>();
     }
 
-    public void addContact(Contact contact) {
-        myContacts.add(contact);
+    public boolean addContact(Contact contact) {
+        String name = contact.getName();
+
+        if(contactExists(name)) {
+            System.out.printf("Contact %s is already registered\n", name);
+            return false;
+        } else {
+            myContacts.add(contact);
+            System.out.printf("Contact %s has been added to list.\n", name);
+            return true;
+        }
     }
 
     public boolean removeContact(String name) {
-        Contact existingContact = findContact(name);
-
-        if(existingContact == null) {
-            System.out.printf("Contact %s has not been found.\n", name);
-            return false;
-        } else {
-            myContacts.remove(existingContact);
+        if(contactExists(name)) {
+            Contact contact = findContact(name);
+            myContacts.remove(contact);
             System.out.printf("Contact %s has been deleted.\n", name);
             return true;
+        } else {
+            System.out.printf("Contact %s has not been found.\n", name);
+            return false;
         }
     }
 
@@ -38,9 +44,18 @@ public class MobilePhone {
         }
     }
 
-    public void updateContact(Contact oldContact, Contact newContact) {
-       int index = myContacts.indexOf(oldContact);
-       myContacts.set(index, newContact);
+    public boolean updateContact(String name, Contact newContact) {
+       Contact oldContact = findContact(name);
+
+       if (contactExists(name)) {
+           int index = myContacts.indexOf(oldContact);
+           myContacts.set(index, newContact);
+           System.out.printf("Contact %s has been updated\n", newContact.getName());
+           return true;
+       } else {
+           System.out.printf("Contact %s has not been found.\n", name);
+           return false;
+       }
     }
 
     public Contact findContact(String name) {
@@ -52,6 +67,12 @@ public class MobilePhone {
         }
 
         return null;
+    }
+
+    private boolean contactExists(String name) {
+        Contact contact = findContact(name);
+
+        return contact != null;
     }
 
     private Contact findContact(int position) {
@@ -69,5 +90,4 @@ public class MobilePhone {
 
         return -1;
     }
-
 }

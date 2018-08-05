@@ -78,15 +78,10 @@ public class Main {
     public static void addContact() {
         Contact contact = promptContactData();
 
-        String name = contact.getName();
-
-        Contact existentContact = myMobilePhone.findContact(name);
-
-        if (existentContact == null) {
-            myMobilePhone.addContact(contact);
-            System.out.printf("%s has been added to contacts list.\n", name);
+        if (myMobilePhone.addContact(contact)) {
+            System.out.println("Success!");
         } else {
-            System.out.printf("Contact %s is already registered.\n", name);
+            System.out.println("Error!");
         }
 
         System.out.println("-----");
@@ -95,15 +90,12 @@ public class Main {
     public static void updateContact() {
         System.out.println("Enter name of the contact that will be replaced:");
         String oldContactName = scanner.next();
+        Contact newContact = promptContactData();
 
-        Contact oldContact = myMobilePhone.findContact(oldContactName);
-
-        if (oldContact == null) {
-            System.out.println("Contact not found");
+        if (myMobilePhone.updateContact(oldContactName, newContact)) {
+            System.out.println("Success!");
         } else {
-            Contact newContact = promptContactData();
-            myMobilePhone.updateContact(oldContact, newContact);
-            System.out.printf("Contact %s has been updated\n", newContact.getName());
+            System.out.println("Error!");
         }
 
         System.out.println("-----");
